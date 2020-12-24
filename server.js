@@ -10,22 +10,16 @@ const PORT = process.env.PORT;
 app.use(cors());
 
 // Requests
-app.use('*', (req, res) => {
-  res.send('This is a CatchAll');
-});
-
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
-
+app.get('/', defaultHandler);
 app.get('/location', locationHandler);
 app.get('/weather', weatherHandler);
+app.use('*', catchAllHandler);
 
 // Handlers
 function locationHandler(req, res){
   // request
   const location = require('./data/location.json');
-  const city = request.query.city;
+  const city = req.query.city;
 
   // tailor
   const locationData = new Location(city, location);
@@ -53,7 +47,6 @@ function weatherHandler(req, res){
   });
 
   // respond
-
   res.send(listPlaces);
 }
 
@@ -61,6 +54,15 @@ function Weather(data){
   this.forecast = data.weather.description;
   this.time = data.datetime;
 }
+
+function defaultHandler(req, res){
+  res.send('Hello World');
+}
+
+function catchAllHandler(req, res){
+  res.send('404. Does Not Exist.');
+}
+
 
 // .listen() to deploy server.
 app.listen(PORT, () => {
