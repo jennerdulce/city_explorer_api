@@ -50,16 +50,16 @@ function weatherHandler(req, res) {
   try {
     // request
     const weather = require('./data/weather.json');
-    const listPlaces = [];
+    const dataArr = [];
 
     // tailor
-    weather.data.forEach(location => {
-      const place = new Weather(location);
-      listPlaces.push(place);
+    weather.data.forEach( value => {
+      const info = new Weather(value);
+      dataArr.push(info);
     });
 
     // respond
-    res.send(listPlaces);
+    res.send(dataArr);
   }
 
   catch (error) {

@@ -19,3 +19,13 @@
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Number and name of feature: Lab 06 Node, NPM, and Express
+
+Estimate of time needed to complete: 3 hours
+
+Start time: 2:00pm
+
+Finish time: 6:00pm
+
+Actual time needed to complete: ~4 hours;
