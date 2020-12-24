@@ -12,7 +12,7 @@ app.use(cors());
 app.get('/', defaultHandler);
 app.get('/location', locationHandler);
 app.get('/weather', weatherHandler);
-// app.use('*', catchAllHandler);
+app.use('*', catchAllHandler);
 
 // Handlers
 function locationHandler(req, res) {
@@ -76,9 +76,9 @@ function defaultHandler(req, res) {
   res.send('Hello World');
 }
 
-// function catchAllHandler(req, res) {
-//   res.send('404. Does Not Exist.');
-// }
+function catchAllHandler(req, res) {
+  res.send('404. Does Not Exist.');
+}
 
 
 // .listen() to deploy server.
