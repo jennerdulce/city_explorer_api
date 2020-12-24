@@ -3,8 +3,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { response } = require('express');
-
 
 const app = express();
 const PORT = process.env.PORT;
@@ -14,15 +12,19 @@ app.use(cors());
 app.get('/', defaultHandler);
 app.get('/location', locationHandler);
 app.get('/weather', weatherHandler);
-app.use('*', catchAllHandler);
+// app.use('*', catchAllHandler);
 
 // Handlers
 function locationHandler(req, res) {
+  const city = req.query.city;
+
+  if (city === '' || !city){
+    res.status(500).send('Sorry, something went wrong');
+  }
 
   try {
     // request
     const location = require('./data/location.json');
-    const city = req.query.city;
 
     // tailor
     const locationData = new Location(city, location);
@@ -74,9 +76,9 @@ function defaultHandler(req, res) {
   res.send('Hello World');
 }
 
-function catchAllHandler(req, res) {
-  res.send('404. Does Not Exist.');
-}
+// function catchAllHandler(req, res) {
+//   res.send('404. Does Not Exist.');
+// }
 
 
 // .listen() to deploy server.
