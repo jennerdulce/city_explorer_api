@@ -3,6 +3,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const { response } = require('express');
 
 
 const app = express();
@@ -16,50 +17,64 @@ app.get('/weather', weatherHandler);
 app.use('*', catchAllHandler);
 
 // Handlers
-function locationHandler(req, res){
-  // request
-  const location = require('./data/location.json');
-  const city = req.query.city;
+function locationHandler(req, res) {
 
-  // tailor
-  const locationData = new Location(city, location);
+  try {
+    // request
+    const location = require('./data/location.json');
+    const city = req.query.city;
 
-  // respond
-  res.send(locationData);
+    // tailor
+    const locationData = new Location(city, location);
+
+    // respond
+    res.send(locationData);
+  }
+
+  catch (error) {
+    res.status(500).send('Sorry, something went wrong');
+  }
 }
 
-function Location(city, geoData){
+function Location(city, geoData) {
   this.search_query = city;
   this.formatted_query = geoData[0].display_name;
   this.latitude = geoData[0].lat;
   this.longitude = geoData[0].lon;
 }
 
-function weatherHandler(req, res){
-  // request
-  const weather = require('./data/weather.json');
-  const listPlaces = [];
+function weatherHandler(req, res) {
 
-  // tailor
-  weather.data.forEach(location => {
-    const place = new Weather(location);
-    listPlaces.push(place);
-  });
+  try {
+    // request
+    const weather = require('./data/weather.json');
+    const listPlaces = [];
 
-  // respond
-  res.send(listPlaces);
+    // tailor
+    weather.data.forEach(location => {
+      const place = new Weather(location);
+      listPlaces.push(place);
+    });
+
+    // respond
+    res.send(listPlaces);
+  }
+
+  catch (error) {
+    res.status(500).send('Sorry, something went wrong');
+  }
 }
 
-function Weather(data){
+function Weather(data) {
   this.forecast = data.weather.description;
   this.time = data.datetime;
 }
 
-function defaultHandler(req, res){
+function defaultHandler(req, res) {
   res.send('Hello World');
 }
 
-function catchAllHandler(req, res){
+function catchAllHandler(req, res) {
   res.send('404. Does Not Exist.');
 }
 
