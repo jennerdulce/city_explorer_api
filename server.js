@@ -9,6 +9,7 @@ const PORT = process.env.PORT;
 app.use(cors());
 
 // Requests
+// /location & /weather are Routes
 app.get('/', defaultHandler);
 app.get('/location', locationHandler);
 app.get('/weather', weatherHandler);
@@ -69,7 +70,7 @@ function weatherHandler(req, res) {
 
 function Weather(data) {
   this.forecast = data.weather.description;
-  this.time = data.datetime;
+  this.time = new Date(data.datetime).toDateString();
 }
 
 function defaultHandler(req, res) {
@@ -77,7 +78,7 @@ function defaultHandler(req, res) {
 }
 
 function catchAllHandler(req, res) {
-  res.send('404. Does Not Exist.');
+  res.send('404. This Route Does Not Exist.');
 }
 
 
