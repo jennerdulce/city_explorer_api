@@ -58,12 +58,18 @@ HEROKU - A platform as a service that enables developers to build, run, and oper
 
 GITHUB - Cloud-based service that helps developers store and manage their code as well as keep tabs on changes to their code.
 
+SUPERAGENT - Allows us to request data by using a URL from APIs and obtains a PROMISE as a response.
+
+APIs - Retrieve data from DATABASES.
+
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. -->
 12-28-2020 9:48pm - Application now has a fully-functional express server, with a GET route for the location and weather resource.
+12-30-2020 12:00pm - Retrieve data using Superagent and API databases
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+LAB 06:
 With help and collaboration with: TJ Simms, Mark Duenas, Nicco(TA)
 
 Number and name of feature: Lab 06 Node, NPM, and Express
@@ -75,3 +81,17 @@ Start time: 2:00pm
 Finish time: 6:00pm
 
 Actual time needed to complete: ~4 hours;
+
+
+LAB 07:
+With help and collaboration with: TJ Simms, Cristian Robles, Skyler(TA)
+
+Number and name of feature: Lab 07 APIs
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 12:00pm
+
+Finish time: 3:00pm
+
+Actual time needed to complete: ~3 hours;
