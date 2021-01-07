@@ -63,7 +63,7 @@ function weatherHandler(req, res) {
   let currentLon = req.query.longitude;
   const url = `http://api.weatherbit.io/v2.0/forecast/daily?&lat=${currentLat}&lon=${currentLon}&key=${key}`;
 
-  // making the request
+  // making the request to the
   superagent.get(url)
 
     .then(response => {
