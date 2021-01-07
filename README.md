@@ -62,10 +62,15 @@ SUPERAGENT - Allows us to request data by using a URL from APIs and obtains a PR
 
 APIs - Retrieve data from DATABASES.
 
+DATABASES - Retrieve and Store data to prevent unecessary API calls
+
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. -->
 12-28-2020 9:48pm - Application now has a fully-functional express server, with a GET route for the location and weather resource.
+
 12-30-2020 12:00pm - Retrieve data using Superagent and API databases
+
+01-06-2020 11:50pm - Using APIs to retrieve and then store to the database. Use databases to retrieve previously searched information.
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
@@ -95,3 +100,17 @@ Start time: 12:00pm
 Finish time: 3:00pm
 
 Actual time needed to complete: ~3 hours;
+
+
+LAB 08:
+With help and collaboration with: Cristian Robles
+
+Number and name of feature: Lab 08 SQL
+
+Estimate of time needed to complete: 8 hours
+
+Start time: 7:31pm
+
+Finish time: 11:49pm
+
+Actual time needed to complete: 4 hours 18 minutes
