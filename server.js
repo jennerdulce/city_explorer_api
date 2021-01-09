@@ -1,11 +1,13 @@
 'use strict';
 
+// DEPENDENCIES
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 
+// START APP
 const app = express();
 const PORT = process.env.PORT || 3000;
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -25,42 +27,37 @@ app.use('*', catchAllHandler);
 function addNewLocation(city, location) {
   const addLocationSQL = `INSERT INTO locations
                         (search_query, formatted_query, latitude, longitude)
-                        VALUES ($1, $2, $3, $4)`;
+                        VALUES ($1, $2, $3, $4)
+                        RETURNING *`;
   const safeValues = [location.search_query, location.formatted_query, location.latitude, location.longitude];
 
   client.query(addLocationSQL, safeValues)
-    .then(results => {
+    .then( () => {
       console.log(`ADDED '${location.search_query}' information to the database..`);
+    })
+    .catch(error => {
+      console.log(error);
     });
 }
 
 function checkLocation(city, url, res) {
   const findLocationSQL = `SELECT *
                           FROM locations
-                          WHERE search_query LIKE '${city}'`;
-  client.query(findLocationSQL) // requests specfic data from data base
+                          WHERE search_query LIKE $1`;
+  const safeValues = [city];
+  client.query(findLocationSQL, safeValues) // requests specfic data from data base
     .then(results => {
       // console.log(results);
       if (results.rowCount === 0) {
         runLocationApi(city, url, res);
       } else if (results.rowCount === 1) {
+        console.log('TALKED TO DATABASE', results.rows[0]);
         res.status(200).json(results.rows[0]);
       }
+    })
+    .catch(error => {
+      console.log(error);
     });
-}
-
-// Handlers
-function locationHandler(req, res) {
-  let key = process.env.GEOCODE_API_KEY;
-  const city = req.query.city;
-  const url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${city}&format=json`;
-
-  if (city === '' || !city) {
-    res.status(500).json('Sorry, something went wrong.');
-  } else {
-    checkLocation(city, url, res);
-  }
-
 }
 
 function runLocationApi(city, url, res) {
@@ -72,14 +69,29 @@ function runLocationApi(city, url, res) {
 
       // tailor
       const location = new Location(city, locationData);
+      console.log('TALKED TO API', location);
       addNewLocation(city, location);
 
       // respond
       res.status(200).json(location); // switch from .send to .json
-    }).catch(err => {
+    })
+    .catch(err => {
       // .error() stands out
       console.error('Error occured in LOCATION', err);
     });
+}
+
+// Handlers
+function locationHandler(req, res) {
+  let key = process.env.GEOCODE_API_KEY;
+  const city = req.query.city;
+  const url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${city}&format=json`;
+  if (city === '' || !city) {
+    res.status(500).json('Sorry, something went wrong.');
+  } else {
+    checkLocation(city, url, res);
+  }
+
 }
 
 function Location(city, geoData) {
