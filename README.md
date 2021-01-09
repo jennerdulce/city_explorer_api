@@ -63,6 +63,11 @@ SUPERAGENT - Allows us to request data by using a URL from APIs and obtains a PR
 APIs - Retrieve data from DATABASES.
 
 DATABASES - Retrieve and Store data to prevent unecessary API calls
+  - Client: the form of a request to the database
+
+POSTGRES - Open-source relational database management system emphasizing extensibility and SQL compliance
+
+SQL (Structured Query Language) - Query language that allows us to add and retrieve content from a database.
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. -->
