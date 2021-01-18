@@ -133,10 +133,11 @@ function movieHandler(req, res) {
       });
       res.status(200).json(moviesPromise);
     })
-    .catch( (err) => {
+    .catch((err) => {
       console.log(err);
     });
 }
+
 
 function Movie(data) {
   this.title = data.original_title;
