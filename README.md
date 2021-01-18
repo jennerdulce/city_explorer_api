@@ -77,6 +77,8 @@ SQL (Structured Query Language) - Query language that allows us to add and retri
 
 01-06-2020 11:50pm - Using APIs to retrieve and then store to the database. Use databases to retrieve previously searched information.
 
+01-13-2020 10:50pm - Using implementing different ways to add in queries and headers to API url/request to the API via Superagent.
+
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 LAB 06:
@@ -119,3 +121,17 @@ Start time: 7:31pm
 Finish time: 11:49pm
 
 Actual time needed to complete: 4 hours 18 minutes
+
+
+LAB 09:
+With help and collaboration with: Cristian Robles, Mark Duenas, TJ Simms, Nicco (TA), Skyler (TA), Ashlyn (TA).
+
+Number and name of feature: Lab 09 SQL continued..
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 7:00pm
+
+Finish time: 9:00pm
+
+Actual time needed to complete: 2 hours
